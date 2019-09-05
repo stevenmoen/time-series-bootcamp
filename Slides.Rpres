@@ -1,0 +1,37 @@
+Introduction to Time Series Modeling
+========================================================
+author: Steven Moen
+date: 9/12/19 - 9/13/19
+autosize: true
+
+Day 1 Agenda
+========================================================
+
+- Examples of time series models
+- Key Assumptions
+-- Strong Stationarity
+-- Weak Stationarity
+- Autocorrelation
+- Moving Averages
+- ARMA Models
+
+Slide With Code
+========================================================
+
+```{r}
+summary(cars)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Slide with Equations
+
+========================================================
+
+
+Did you know that $2 + 2 = 4$?
