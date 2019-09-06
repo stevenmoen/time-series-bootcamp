@@ -230,13 +230,60 @@ summary {
 
 <!-- rnb-text-begin -->
 <p>This file will contain exercises which we will use in class.</p>
+<div id="exercises" class="section level1">
+<h1>Exercises</h1>
+<div id="exercise-1-finding-the-expected-value-of-a-random-walk-with-drift" class="section level2">
+<h2>Exercise 1: Finding the Expected Value of a Random Walk with Drift</h2>
+<p>Compute the expectation of a random walk with drift model given below:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  x_t = \delta t + \sum_{j=1}^t w_j,
+  t = 1,2,....
+  \end{aligned}
+\]</span></p>
+</div>
+</div>
+<div id="solutions" class="section level1">
+<h1>Solutions</h1>
+<div id="exercise-1-solution-finding-the-expected-value-of-a-random-walk-with-drift" class="section level2">
+<h2>Exercise 1 Solution: Finding the Expected Value of a Random Walk with Drift</h2>
+<p>We begin by taking the expectation of both sides of the equation below</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \mathbb{E}(x_t) = \mathbb{E}\left(\delta t + \sum_{j=1}^t w_j\right)
+  \end{aligned}
+\]</span></p>
+<p>An important property of expected values is that it is a linear operator, which is to say that the following is in true in general where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are real-valued constants and <span class="math inline">\(X_t\)</span> and <span class="math inline">\(Y_t\)</span> are random variables with finite expected values, support over the entire real line, and indexed by time:</p>
+<p><span class="math display">\[
+\mathbb{E}(aX_t + bY_t ) = a\mathbb{E}(X_t ) + b\mathbb{E}(Y_t )
+\]</span></p>
+<p>Below is a brief proof working directly from the definition of an expectation:</p>
+<p><span class="math display">\[
+\mathbb{E}(aX_t  + bY_t ) = \int_{-\infty}^{\infty} (aX_t  + bY_t) dt
+\]</span> <span class="math display">\[
+= a\int_{-\infty}^{\infty} (X_t) dt  + b\int_{-\infty}^{\infty} (Y_t) dt
+\]</span> <span class="math display">\[
+= \mathbb{E}(X_t ) + b\mathbb{E}(Y_t )
+\]</span></p>
+<p>Which completes the proof.</p>
+<p>Thus, applying the property proved above, we can say the following:</p>
+<p><span class="math display">\[
+  \mathbb{E}(x_t) = \mathbb{E}\left(\delta t + \sum_{j=1}^t w_j\right) = \mathbb{E}(\delta t) + \mathbb{E} \left(\sum_{j=1}^t w_j\right)
+\]</span></p>
+<p>Noting that in the random walk model, both <span class="math inline">\(\delta\)</span> and <span class="math inline">\(t\)</span> are real valued constants, we know $ (t)$. Also, using the linear operator property used above, we can break apart the sum of the noise terms as follows:</p>
+<p><span class="math display">\[
+\mathbb{E} \left(\sum_{j=1}^t w_j\right) = \mathbb{E}(w_1) + \mathbb{E}(w_2) + ... + \mathbb{E}(w_t)
+\]</span></p>
+<p>Note that in our formulation of white noise, we said that <span class="math inline">\(w_t \sim \text{wn}(0, \sigma_m^2)\)</span>, thus, the expected value of <span class="math inline">\(w_t\)</span> is 0.</p>
+<p>Synthesizing all of the above facts, we arrive at the solution:</p>
+<p><span class="math display">\[
+  \mathbb{E}(x_t) = \delta t
+\]</span></p>
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
+</div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGltZSBTZXJpZXMgRXhlcmNpc2VzIgphdXRob3I6ICJTdGV2ZW4gTW9lbiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBmaWxlIHdpbGwgY29udGFpbiBleGVyY2lzZXMgd2hpY2ggd2Ugd2lsbCB1c2UgaW4gY2xhc3MuCgpgYGB7cn0KCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGltZSBTZXJpZXMgRXhlcmNpc2VzIgphdXRob3I6ICJTdGV2ZW4gTW9lbiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBmaWxlIHdpbGwgY29udGFpbiBleGVyY2lzZXMgd2hpY2ggd2Ugd2lsbCB1c2UgaW4gY2xhc3MuCgojIEV4ZXJjaXNlcwoKIyMgRXhlcmNpc2UgMTogRmluZGluZyB0aGUgRXhwZWN0ZWQgVmFsdWUgb2YgYSBSYW5kb20gV2FsayB3aXRoIERyaWZ0CgpDb21wdXRlIHRoZSBleHBlY3RhdGlvbiBvZiBhIHJhbmRvbSB3YWxrIHdpdGggZHJpZnQgbW9kZWwgZ2l2ZW4gYmVsb3c6CgokJAogIFxiZWdpbnthbGlnbmVkfQogIHhfdCA9IFxkZWx0YSB0ICsgXHN1bV97aj0xfV50IHdfaiwKICB0ID0gMSwyLC4uLi4KICBcZW5ke2FsaWduZWR9CiQkCgojIFNvbHV0aW9ucwoKIyMgRXhlcmNpc2UgMSBTb2x1dGlvbjogRmluZGluZyB0aGUgRXhwZWN0ZWQgVmFsdWUgb2YgYSBSYW5kb20gV2FsayB3aXRoIERyaWZ0CgpXZSBiZWdpbiBieSB0YWtpbmcgdGhlIGV4cGVjdGF0aW9uIG9mIGJvdGggc2lkZXMgb2YgdGhlIGVxdWF0aW9uIGJlbG93CgokJAogIFxiZWdpbnthbGlnbmVkfQogIFxtYXRoYmJ7RX0oeF90KSA9IFxtYXRoYmJ7RX1cbGVmdChcZGVsdGEgdCArIFxzdW1fe2o9MX1edCB3X2pccmlnaHQpCiAgXGVuZHthbGlnbmVkfQokJAoKQW4gaW1wb3J0YW50IHByb3BlcnR5IG9mIGV4cGVjdGVkIHZhbHVlcyBpcyB0aGF0IGl0IGlzIGEgbGluZWFyIG9wZXJhdG9yLCB3aGljaCBpcyB0byBzYXkgdGhhdCB0aGUgZm9sbG93aW5nIGlzIGluIHRydWUgaW4gZ2VuZXJhbCB3aGVyZSAkYSQgYW5kICRiJCBhcmUgcmVhbC12YWx1ZWQgY29uc3RhbnRzIGFuZCAkWF90JCBhbmQgJFlfdCQgYXJlIHJhbmRvbSB2YXJpYWJsZXMgd2l0aCBmaW5pdGUgZXhwZWN0ZWQgdmFsdWVzLCBzdXBwb3J0IG92ZXIgdGhlIGVudGlyZSByZWFsIGxpbmUsIGFuZCBpbmRleGVkIGJ5IHRpbWU6CgokJApcbWF0aGJie0V9KGFYX3QgKyBiWV90ICkgPSBhXG1hdGhiYntFfShYX3QgKSArIGJcbWF0aGJie0V9KFlfdCApCiQkCgpCZWxvdyBpcyBhIGJyaWVmIHByb29mIHdvcmtpbmcgZGlyZWN0bHkgZnJvbSB0aGUgZGVmaW5pdGlvbiBvZiBhbiBleHBlY3RhdGlvbjoKCiQkClxtYXRoYmJ7RX0oYVhfdCAgKyBiWV90ICkgPSBcaW50X3stXGluZnR5fV57XGluZnR5fSAoYVhfdCAgKyBiWV90KSBkdAokJAokJAo9IGFcaW50X3stXGluZnR5fV57XGluZnR5fSAoWF90KSBkdCAgKyBiXGludF97LVxpbmZ0eX1ee1xpbmZ0eX0gKFlfdCkgZHQKJCQKJCQKPSBcbWF0aGJie0V9KFhfdCApICsgYlxtYXRoYmJ7RX0oWV90ICkKJCQKCldoaWNoIGNvbXBsZXRlcyB0aGUgcHJvb2YuCgpUaHVzLCBhcHBseWluZyB0aGUgcHJvcGVydHkgcHJvdmVkIGFib3ZlLCB3ZSBjYW4gc2F5IHRoZSBmb2xsb3dpbmc6CgokJAogIFxtYXRoYmJ7RX0oeF90KSA9IFxtYXRoYmJ7RX1cbGVmdChcZGVsdGEgdCArIFxzdW1fe2o9MX1edCB3X2pccmlnaHQpID0gXG1hdGhiYntFfShcZGVsdGEgdCkgKyBcbWF0aGJie0V9IFxsZWZ0KFxzdW1fe2o9MX1edCB3X2pccmlnaHQpCiQkCgpOb3RpbmcgdGhhdCBpbiB0aGUgcmFuZG9tIHdhbGsgbW9kZWwsIGJvdGggJFxkZWx0YSQgYW5kICR0JCBhcmUgcmVhbCB2YWx1ZWQgY29uc3RhbnRzLCB3ZSBrbm93ICQgXG1hdGhiYntFfShcZGVsdGEgdCkkLiBBbHNvLCB1c2luZyB0aGUgbGluZWFyIG9wZXJhdG9yIHByb3BlcnR5IHVzZWQgYWJvdmUsIHdlIGNhbiBicmVhayBhcGFydCB0aGUgc3VtIG9mIHRoZSBub2lzZSB0ZXJtcyBhcyBmb2xsb3dzOgoKJCQKXG1hdGhiYntFfSBcbGVmdChcc3VtX3tqPTF9XnQgd19qXHJpZ2h0KSA9IFxtYXRoYmJ7RX0od18xKSArIFxtYXRoYmJ7RX0od18yKSArIC4uLiArIFxtYXRoYmJ7RX0od190KQokJAoKTm90ZSB0aGF0IGluIG91ciBmb3JtdWxhdGlvbiBvZiB3aGl0ZSBub2lzZSwgd2Ugc2FpZCB0aGF0ICR3X3QgXHNpbSBcdGV4dHt3bn0oMCwgXHNpZ21hX21eMikkLCB0aHVzLCB0aGUgZXhwZWN0ZWQgdmFsdWUgb2YgJHdfdCQgaXMgMC4gCgpTeW50aGVzaXppbmcgYWxsIG9mIHRoZSBhYm92ZSBmYWN0cywgd2UgYXJyaXZlIGF0IHRoZSBzb2x1dGlvbjoKCiQkCiAgXG1hdGhiYntFfSh4X3QpID0gXGRlbHRhIHQKJCQ=</div>
 
 
 

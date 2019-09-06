@@ -6,7 +6,67 @@ output: html_notebook
 
 This file will contain exercises which we will use in class.
 
-```{r}
+# Exercises
 
-```
+## Exercise 1: Finding the Expected Value of a Random Walk with Drift
 
+Compute the expectation of a random walk with drift model given below:
+
+$$
+  \begin{aligned}
+  x_t = \delta t + \sum_{j=1}^t w_j,
+  t = 1,2,....
+  \end{aligned}
+$$
+
+# Solutions
+
+## Exercise 1 Solution: Finding the Expected Value of a Random Walk with Drift
+
+We begin by taking the expectation of both sides of the equation below
+
+$$
+  \begin{aligned}
+  \mathbb{E}(x_t) = \mathbb{E}\left(\delta t + \sum_{j=1}^t w_j\right)
+  \end{aligned}
+$$
+
+An important property of expected values is that it is a linear operator, which is to say that the following is in true in general where $a$ and $b$ are real-valued constants and $X_t$ and $Y_t$ are random variables with finite expected values, support over the entire real line, and indexed by time:
+
+$$
+\mathbb{E}(aX_t + bY_t ) = a\mathbb{E}(X_t ) + b\mathbb{E}(Y_t )
+$$
+
+Below is a brief proof working directly from the definition of an expectation:
+
+$$
+\mathbb{E}(aX_t  + bY_t ) = \int_{-\infty}^{\infty} (aX_t  + bY_t) dt
+$$
+$$
+= a\int_{-\infty}^{\infty} (X_t) dt  + b\int_{-\infty}^{\infty} (Y_t) dt
+$$
+$$
+= \mathbb{E}(X_t ) + b\mathbb{E}(Y_t )
+$$
+
+Which completes the proof.
+
+Thus, applying the property proved above, we can say the following:
+
+$$
+  \mathbb{E}(x_t) = \mathbb{E}\left(\delta t + \sum_{j=1}^t w_j\right) = \mathbb{E}(\delta t) + \mathbb{E} \left(\sum_{j=1}^t w_j\right)
+$$
+
+Noting that in the random walk model, both $\delta$ and $t$ are real valued constants, we know $ \mathbb{E}(\delta t)$. Also, using the linear operator property used above, we can break apart the sum of the noise terms as follows:
+
+$$
+\mathbb{E} \left(\sum_{j=1}^t w_j\right) = \mathbb{E}(w_1) + \mathbb{E}(w_2) + ... + \mathbb{E}(w_t)
+$$
+
+Note that in our formulation of white noise, we said that $w_t \sim \text{wn}(0, \sigma_m^2)$, thus, the expected value of $w_t$ is 0. 
+
+Synthesizing all of the above facts, we arrive at the solution:
+
+$$
+  \mathbb{E}(x_t) = \delta t
+$$
