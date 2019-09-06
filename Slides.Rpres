@@ -7,20 +7,81 @@ autosize: true
 Day 1 Agenda
 ========================================================
 
-- Examples of time series models
-- Key Assumptions
--- Strong Stationarity
--- Weak Stationarity
-- Autocorrelation
-- Moving Averages
-- ARMA Models
+- Examples of time series data
+- Key Assumptions and Tools
+- Autoregressive (AR) Models
+- Moving-Average (MA) Models
+- Autoregressive Moving-Average (ARMA) Models
 
-Slide With Code
+Day 2 Agenda
 ========================================================
 
-```{r}
-summary(cars)
+- Autoregressive Moving-Average (ARMA) Models (continued)
+- Model Diagnostics
+- Real Data Analysis
+- Introduction to Frequency Domain
+
+Special Thanks
+========================================================
+
+Many of the examples used in this presentation can be found in Time Series Analysis and Its Applications by Robert H. Shumway and David S. Stoffer.
+
+
+
+Examples of Time Series Data 
+========================================================
+
+This example is from Shumway and Stoffer.
+
+```{r, echo=FALSE}
+library(astsa)
+plot(jj, type="o", ylab="Quarterly Earnings per Share")
 ```
+
+Examples of Time Series Data
+========================================================
+
+Also from Shumway and Stoffer.
+
+```{r, echo=FALSE}
+plot(globtemp, type="o", ylab="Global Temperature Deviations")
+```
+
+Examples of Time Series Data
+========================================================
+
+Also from Shumway and Stoffer.
+
+```{r, echo=FALSE}
+par(mfrow = c(2,1)) # set up the graphics
+plot(soi, ylab="", xlab="", main="Southern Oscillation Index")
+plot(rec, ylab="", xlab="", main="Recruitment")
+```
+
+Key Assumptions and Tools
+========================================================
+
+A common assumption in statistical modeling is independent and identically distributed noise, often abbreviated (i.i.d.).
+
+Two random variables $A$ and $B$ are independent if and only if the following is true:
+
+$$
+  \begin{aligned}
+  \mathbb{P}(A \cap B) = \mathbb{P}(A)\mathbb{P}(B)
+  \end{aligned}
+$$
+
+Why would this pose a problem when modeling time series?
+
+Key Assumptions and Tools
+========================================================
+
+
+Exercise
+========================================================
+
+
+
 
 Slide With Plot
 ========================================================
@@ -35,3 +96,7 @@ Slide with Equations
 
 
 Did you know that $2 + 2 = 4$?
+
+Special Thanks
+========================================================
+
