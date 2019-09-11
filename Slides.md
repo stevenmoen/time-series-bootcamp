@@ -139,10 +139,66 @@ This model is very useful in applications such as financial economics, since a r
 [INSERT QUOTE]
 
 
-Exercise: Finding the Expected Value of a Random Walk with Drift
+Key Tools: Autocovariance
+========================================================
+
+The autocovariance function of a time series is defined as follows:
+
+$$
+  \begin{aligned}
+  \gamma_x(s,t) = cov(x_s, x_t) = \mathbb{E}[(x_s - \mu_s)(x_t - \mu_t)]
+  \end{aligned}
+$$
+
+for all $s$ and $t$. 
+
+Key Tools: Autocovariance
+========================================================
+
+- According to Shumway and Stoffer, the "autocovariance measures the linear dependence between two points on the same series observed at different times"
+- Remember, a covariance of 0 does NOT in general imply that two points in a series are independent
+
+
+Exercise: Finding the Autocovariance of a Random Walk with Drift
 ========================================================
 
 Compute the expectation of a random walk with drift model given in the previous slides and restated below:
+
+$$
+  \begin{aligned}
+  x_t = \delta t + \sum_{j=1}^t w_j,
+  t = 1,2,....
+  \end{aligned}
+$$
+
+where $w_t$ is a white noise series defined by:
+
+$$
+  \begin{aligned}
+  w_t \sim \text{wn}(0, \sigma_m^2)
+  \end{aligned}
+$$
+
+Feel free to compute this using a pencil and paper, or using LaTeX (if you're familiar with it) in the TS_Exercises.Rmd file.
+
+Solution: Finding the Autocovariance of a Random Walk with Drift
+========================================================
+
+The autocovariance of a random walk with drift is as follows:
+
+$$
+  \begin{aligned}
+  \mathbb{E}(x_t) = \delta t
+  \end{aligned}
+$$
+
+Please refer to the .Rmd file for a more in-depth solution.
+
+
+Exercise: Finding the Autocovariance of a Random Walk with Drift
+========================================================
+
+Compute the autocovariance of a random walk with dri
 
 $$
   \begin{aligned}
@@ -168,26 +224,168 @@ The expected value of a random walk with drift is as follows:
 
 $$
   \begin{aligned}
-  \mathbb{E}(x_t) = \delta t
+  \gamma_x(s,t) = \min(s,t) \sigma_w^2
   \end{aligned}
 $$
 
 Please refer to the .Rmd file for a more in-depth solution.
 
-
-
-Slide With Plot
+Important Assumptions: Strong Stationarity
 ========================================================
 
-![plot of chunk unnamed-chunk-4](Slides-figure/unnamed-chunk-4-1.png)
+The definition of a strictly stationary time series, according to Shumway and Stoffer, is that the "probabilistic behavior of every collection of values" $x_{t1}, x_{t2}, ..., x_{tk}$ "is identical to that of the shifted set" $x_{t1+h}, x_{t2+h}, ..., x_{tk+h}$.
 
-Slide with Equations
+- This assumption is not widely used in applications as it implies that the distribution must be constant at every value in a time series
 
+Important Assumptions: Weak Stationarity
+========================================================
+
+According to Shumway and Stoffer, a weakly stationary series $x_t$ is given by the following:
+
+- The mean value function, $\mu_t$ is constant and does not depend on the time
+- The autocovariance function, $\gamma(s,t)$ depends on s and t only through their difference $|s-t|$
+
+Important Assumptions: Verification (Exercise)
+========================================================
+
+Are the following time series weakly stationary?
+
+1. $x_t = \delta t + \sum_{j=1}^t w_j, t = 1,2,....$
+2. $v_t = \frac{1}{3}(w_{t-1} + w_t + w_{t+1})$
+
+Important Assumptions: Verification (Exercise)
 ========================================================
 
 
-Did you know that $2 + 2 = 4$?
+1. $x_t = \delta t + \sum_{j=1}^t w_j, t = 1,2,....$
+- No
+2. $v_t = \frac{1}{3}(w_{t-1} + w_t + w_{t+1})$
+- Yes
 
-Special Thanks
+Please refer to the .Rmd file for a more in-depth solution.
+
+
+Autoregressive Models
+========================================================
+
+An autoregressive model of order p is defined as follows:
+
+$$
+x_t = \phi_1 x_{t-1} + \phi_2 x_{t-2} + ... + \phi_p x_{t-p} + w_t
+$$
+
+where:
+
+- $x_t$ is stationary
+- $w_t \sim wn(0, \sigma_w^2)$
+- $\phi_1, ..., \phi_p$ are non-zero constants 
+- $x_t$ has mean 0
+
+Aside: Backshift Operator
+========================================================
+
+The backshift operator is defined as follows:
+
+$$
+B x_t = x_{t-1}
+$$
+
+and can be extended as follows:
+
+$$
+B^2 x_t = B(Bx_{t}) = Bx_{t-1} = x_{t-2}
+$$
+
+Autoregressive Operator
+========================================================
+
+Below is the autoregressive operator. It will be useful when we discuss ARMA models.
+
+$$
+\phi(B) = 1 - \phi_1 B - \phi_2 B^2 - ... - \phi_p B^p
+$$
+
+Using this, the initial AR model can be written as:
+
+$$
+(1 - \phi_1 B - \phi_2 B^2 - ... - \phi_p B^p)x_t = w_t
+$$
+
+or alternatively as:
+
+$$
+(\phi(B))x_t = w_t
+$$
+
+Example: An AR(1) Model
+========================================================
+
+An autoregressive model can be written as follows:
+
+$$
+x_t = \phi x_{t-1} + w_t = \phi(\phi x_{t-2} + w_{t-1}) + w_t
+$$
+$$
+= \phi^2 x_{t-2} + \phi w_{t-1} + w_t
+$$
+$$
+= \phi^k x_{t-k} + \sum_{j=0}^{k-1} \phi^j w_{t-j}
+$$
+
+
+Example: An AR(1) Model
+========================================================
+
+An autoregressive model can be written as follows:
+
+$$
+x_t = \phi x_{t-1} + w_t = \phi(\phi x_{t-2} + w_{t-1}) + w_t
+$$
+$$
+= \phi^2 x_{t-2} + \phi w_{t-1} + w_t
+$$
+$$
+= \phi^k x_{t-k} + \sum_{j=0}^{k-1} \phi^j w_{t-j}
+$$
+
+Thus, if $|\phi| < 1 \text{ and } \mathbb{V}(x_t) < \infty$ for all t, then we can represent the AR(1) as a linear process given by:
+
+$$
+x_t = \sum_{j=0}^\infty \phi^j w_{t-j}
+$$
+
+Moving Average Models
+========================================================
+
+A moving average model of order q is defined as follows:
+
+$$
+x_t =  w_t + \theta_1 w_{t-1} + \theta_2 w_{t-2} + ... + \theta_p w_{t-p}
+$$
+
+where:
+
+- $x_t$ is stationary
+- $w_t \sim wn(0, \sigma_w^2)$
+- $\theta_1, ..., \theta_p, \theta_p \neq 0$ are parameters 
+- $x_t$ has mean 0
+
+Moving Average Operator
+========================================================
+
+The moving average operator is given by
+
+$$
+\theta(B) = 1 + \theta_1 B + \theta_2 B^2 + ... + \theta_q B^q
+$$
+
+which allows the model on the previous slide to be written as:
+
+$$
+x_t = \theta(B) w_t
+$$
+
+
+Autoregressive Moving Average Models
 ========================================================
 

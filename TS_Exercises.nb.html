@@ -230,8 +230,6 @@ summary {
 
 <!-- rnb-text-begin -->
 <p>This file will contain exercises which we will use in class.</p>
-<div id="exercises" class="section level1">
-<h1>Exercises</h1>
 <div id="exercise-1-finding-the-expected-value-of-a-random-walk-with-drift" class="section level2">
 <h2>Exercise 1: Finding the Expected Value of a Random Walk with Drift</h2>
 <p>Compute the expectation of a random walk with drift model given below:</p>
@@ -241,10 +239,13 @@ summary {
   t = 1,2,....
   \end{aligned}
 \]</span></p>
+<p>where <span class="math inline">\(w_t\)</span> is a white noise series defined by:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  w_t \sim \text{wn}(0, \sigma_m^2)
+  \end{aligned}
+\]</span></p>
 </div>
-</div>
-<div id="solutions" class="section level1">
-<h1>Solutions</h1>
 <div id="exercise-1-solution-finding-the-expected-value-of-a-random-walk-with-drift" class="section level2">
 <h2>Exercise 1 Solution: Finding the Expected Value of a Random Walk with Drift</h2>
 <p>We begin by taking the expectation of both sides of the equation below</p>
@@ -279,11 +280,105 @@ summary {
 <p><span class="math display">\[
   \mathbb{E}(x_t) = \delta t
 \]</span></p>
+</div>
+<div id="exercise-2-finding-the-autocovariance-of-a-random-walk-with-drift" class="section level2">
+<h2>Exercise 2: Finding the Autocovariance of a Random Walk with Drift</h2>
+<p>Compute the expectation of a random walk with drift model given below:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  x_t = \delta t + \sum_{j=1}^t w_j,
+  t = 1,2,....
+  \end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(w_t\)</span> is a white noise series defined by:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  w_t \sim \text{wn}(0, \sigma_m^2)
+  \end{aligned}
+\]</span></p>
+</div>
+<div id="exercise-2-solution-finding-the-autocovariance-of-a-random-walk-with-drift" class="section level2">
+<h2>Exercise 2 Solution: Finding the Autocovariance of a Random Walk with Drift</h2>
+<p>Observe that for a random walk with drift <span class="math inline">\(x_t\)</span>, we know that the following is true:</p>
+<p><span class="math display">\[
+x_t = \sum_{j=1}^t w_j + t \delta
+\]</span></p>
+<p>Thus, comparing the series at two different points <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span>, we have:</p>
+<p><span class="math display">\[
+\gamma_x(s,t) = cov(x_s, x_t) = cov(\sum_{j=1}^t w_j + t \delta, \sum_{i=1}^s w_i + s \delta)
+\]</span></p>
+<p>We know that since <span class="math inline">\(t \delta\)</span> and <span class="math inline">\(s \delta\)</span> are both constants, the above is equivalent to:</p>
+<p><span class="math display">\[
+= cov(\sum_{j=1}^t w_j, \sum_{i=1}^s w_i)
+\]</span></p>
+<p>Note that for <span class="math inline">\(i \ne j\)</span>, we know that the definition of white noise tells us that <span class="math inline">\(cov(w_i, w_j) = 0\)</span>. Thus, it follows that the above expression is equal to:</p>
+<p><span class="math display">\[
+= cov(\sum_{j=1}^t w_j, \sum_{i=1}^s w_i) = \min(s,t) \sigma_w^2
+\]</span></p>
+</div>
+<div id="exercises-3-and-4-is-a-random-walk-with-drift-weakly-stationary" class="section level2">
+<h2>Exercises 3 and 4: Is a random walk with drift weakly stationary</h2>
+<p>Are the following time series weakly stationary?</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(x_t = \delta t + \sum_{j=1}^t w_j, t = 1,2,....\)</span></li>
+<li><span class="math inline">\(v_t = \tfrac{1}{3} (w_{t-1} + w_t + w_{t+1})\)</span></li>
+</ol>
+<p>where <span class="math inline">\(w_t\)</span> is a white noise series defined by:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  w_t \sim \text{wn}(0, \sigma_m^2)
+  \end{aligned}
+\]</span></p>
+</div>
+<div id="exercise-3-solution" class="section level2">
+<h2>Exercise 3 Solution</h2>
+<p>We found earlier that the expected value of a random walk with drift was given by the following:</p>
+<p><span class="math display">\[
+\mathbb{E}(x_t) = \delta t
+\]</span></p>
+<p>Also, the autocovariance is given by:</p>
+<p><span class="math display">\[
+\gamma_x(s,t) = \min(s,t) \sigma_w^2
+\]</span></p>
+<p>For a series to be weakly stationary, the mean function must be constant. We can see from the above mean function that the mean function is non-constant unless <span class="math inline">\(\delta = 0\)</span>. Furthermore, the autocovariance function does not depend on <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> only through their differences. Either of these is sufficient to show that a random walk with a drift is not stationary.</p>
+</div>
+<div id="exercise-4-solution" class="section level2">
+<h2>Exercise 4 Solution</h2>
+<p>Let’s start by finding the expected value of the series:</p>
+<p><span class="math display">\[
+\mathbb{E}(v_t) = \mathbb{E} (\tfrac{1}{3} (w_{t-1} + w_t + w_{t+1}))
+\]</span> <span class="math display">\[
+= \tfrac{1}{3}\mathbb{E} (w_{t-1} + w_t + w_{t+1}) = \tfrac{1}{3}(\mathbb{E} (w_{t-1}) + \mathbb{E} (w_{t}) + \mathbb{E} (w_{t+1})) = 0
+\]</span></p>
+<p>The mean function is constant at 0. Next, let’s find the autocovariance function:</p>
+<p><span class="math display">\[
+\gamma_v(t,t) = \tfrac{1}{9} cov((w_{t-1} + w_t + w_{t+1}), (w_{t-1} + w_t + w_{t+1}))
+\]</span></p>
+<p>Recall that for <span class="math inline">\(s \neq t\)</span>, <span class="math inline">\(cov(w_s, w_t) = 0\)</span>. Thus, the above simplifies to:</p>
+<p><span class="math display">\[
+\gamma_v(t,t) = \tfrac{1}{9} (cov(w_{t-1}, w_{t-1}) + cov(w_{t}, w_{t}) + cov(w_{t+1}, w_{t+1})) = \tfrac{3}{9}\sigma_w^2
+\]</span></p>
+<p>Following similar logic, we know:</p>
+<p><span class="math display">\[
+\gamma_v(t+1,t) = \tfrac{1}{9} cov((w_{t} + w_{t+1} + w_{t+2}), (w_{t-1} + w_t + w_{t+1}))
+\]</span> <span class="math display">\[
+= \tfrac{1}{9}(cov(w_{t}, w_{t}) + cov(w_{t+1}, w_{t+1})) = \tfrac{2}{9}\sigma_w^2
+\]</span></p>
+<p>This logic can be repeated to show the following solution:</p>
+<p><span class="math display">\[
+\gamma_v(s,t) = \tfrac{3}{9} \sigma_w^2 \text{ if } s = t
+\]</span> <span class="math display">\[
+= \tfrac{2}{9} \sigma_w^2 \text{ if } |s-t| = 1
+\]</span> <span class="math display">\[
+= \tfrac{1}{9} \sigma_w^2 \text{ if } |s-t| = 2
+\]</span> <span class="math display">\[
+= 0 \text{ if } |s-t| &gt; 2
+\]</span></p>
+<p>The above autocovariance analysis shows that the second condition for a weakly stationary time series is met. Thus, this moving average is weakly stationary.</p>
 <!-- rnb-text-end -->
 </div>
-</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGltZSBTZXJpZXMgRXhlcmNpc2VzIgphdXRob3I6ICJTdGV2ZW4gTW9lbiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBmaWxlIHdpbGwgY29udGFpbiBleGVyY2lzZXMgd2hpY2ggd2Ugd2lsbCB1c2UgaW4gY2xhc3MuCgojIEV4ZXJjaXNlcwoKIyMgRXhlcmNpc2UgMTogRmluZGluZyB0aGUgRXhwZWN0ZWQgVmFsdWUgb2YgYSBSYW5kb20gV2FsayB3aXRoIERyaWZ0CgpDb21wdXRlIHRoZSBleHBlY3RhdGlvbiBvZiBhIHJhbmRvbSB3YWxrIHdpdGggZHJpZnQgbW9kZWwgZ2l2ZW4gYmVsb3c6CgokJAogIFxiZWdpbnthbGlnbmVkfQogIHhfdCA9IFxkZWx0YSB0ICsgXHN1bV97aj0xfV50IHdfaiwKICB0ID0gMSwyLC4uLi4KICBcZW5ke2FsaWduZWR9CiQkCgojIFNvbHV0aW9ucwoKIyMgRXhlcmNpc2UgMSBTb2x1dGlvbjogRmluZGluZyB0aGUgRXhwZWN0ZWQgVmFsdWUgb2YgYSBSYW5kb20gV2FsayB3aXRoIERyaWZ0CgpXZSBiZWdpbiBieSB0YWtpbmcgdGhlIGV4cGVjdGF0aW9uIG9mIGJvdGggc2lkZXMgb2YgdGhlIGVxdWF0aW9uIGJlbG93CgokJAogIFxiZWdpbnthbGlnbmVkfQogIFxtYXRoYmJ7RX0oeF90KSA9IFxtYXRoYmJ7RX1cbGVmdChcZGVsdGEgdCArIFxzdW1fe2o9MX1edCB3X2pccmlnaHQpCiAgXGVuZHthbGlnbmVkfQokJAoKQW4gaW1wb3J0YW50IHByb3BlcnR5IG9mIGV4cGVjdGVkIHZhbHVlcyBpcyB0aGF0IGl0IGlzIGEgbGluZWFyIG9wZXJhdG9yLCB3aGljaCBpcyB0byBzYXkgdGhhdCB0aGUgZm9sbG93aW5nIGlzIGluIHRydWUgaW4gZ2VuZXJhbCB3aGVyZSAkYSQgYW5kICRiJCBhcmUgcmVhbC12YWx1ZWQgY29uc3RhbnRzIGFuZCAkWF90JCBhbmQgJFlfdCQgYXJlIHJhbmRvbSB2YXJpYWJsZXMgd2l0aCBmaW5pdGUgZXhwZWN0ZWQgdmFsdWVzLCBzdXBwb3J0IG92ZXIgdGhlIGVudGlyZSByZWFsIGxpbmUsIGFuZCBpbmRleGVkIGJ5IHRpbWU6CgokJApcbWF0aGJie0V9KGFYX3QgKyBiWV90ICkgPSBhXG1hdGhiYntFfShYX3QgKSArIGJcbWF0aGJie0V9KFlfdCApCiQkCgpCZWxvdyBpcyBhIGJyaWVmIHByb29mIHdvcmtpbmcgZGlyZWN0bHkgZnJvbSB0aGUgZGVmaW5pdGlvbiBvZiBhbiBleHBlY3RhdGlvbjoKCiQkClxtYXRoYmJ7RX0oYVhfdCAgKyBiWV90ICkgPSBcaW50X3stXGluZnR5fV57XGluZnR5fSAoYVhfdCAgKyBiWV90KSBkdAokJAokJAo9IGFcaW50X3stXGluZnR5fV57XGluZnR5fSAoWF90KSBkdCAgKyBiXGludF97LVxpbmZ0eX1ee1xpbmZ0eX0gKFlfdCkgZHQKJCQKJCQKPSBcbWF0aGJie0V9KFhfdCApICsgYlxtYXRoYmJ7RX0oWV90ICkKJCQKCldoaWNoIGNvbXBsZXRlcyB0aGUgcHJvb2YuCgpUaHVzLCBhcHBseWluZyB0aGUgcHJvcGVydHkgcHJvdmVkIGFib3ZlLCB3ZSBjYW4gc2F5IHRoZSBmb2xsb3dpbmc6CgokJAogIFxtYXRoYmJ7RX0oeF90KSA9IFxtYXRoYmJ7RX1cbGVmdChcZGVsdGEgdCArIFxzdW1fe2o9MX1edCB3X2pccmlnaHQpID0gXG1hdGhiYntFfShcZGVsdGEgdCkgKyBcbWF0aGJie0V9IFxsZWZ0KFxzdW1fe2o9MX1edCB3X2pccmlnaHQpCiQkCgpOb3RpbmcgdGhhdCBpbiB0aGUgcmFuZG9tIHdhbGsgbW9kZWwsIGJvdGggJFxkZWx0YSQgYW5kICR0JCBhcmUgcmVhbCB2YWx1ZWQgY29uc3RhbnRzLCB3ZSBrbm93ICQgXG1hdGhiYntFfShcZGVsdGEgdCkkLiBBbHNvLCB1c2luZyB0aGUgbGluZWFyIG9wZXJhdG9yIHByb3BlcnR5IHVzZWQgYWJvdmUsIHdlIGNhbiBicmVhayBhcGFydCB0aGUgc3VtIG9mIHRoZSBub2lzZSB0ZXJtcyBhcyBmb2xsb3dzOgoKJCQKXG1hdGhiYntFfSBcbGVmdChcc3VtX3tqPTF9XnQgd19qXHJpZ2h0KSA9IFxtYXRoYmJ7RX0od18xKSArIFxtYXRoYmJ7RX0od18yKSArIC4uLiArIFxtYXRoYmJ7RX0od190KQokJAoKTm90ZSB0aGF0IGluIG91ciBmb3JtdWxhdGlvbiBvZiB3aGl0ZSBub2lzZSwgd2Ugc2FpZCB0aGF0ICR3X3QgXHNpbSBcdGV4dHt3bn0oMCwgXHNpZ21hX21eMikkLCB0aHVzLCB0aGUgZXhwZWN0ZWQgdmFsdWUgb2YgJHdfdCQgaXMgMC4gCgpTeW50aGVzaXppbmcgYWxsIG9mIHRoZSBhYm92ZSBmYWN0cywgd2UgYXJyaXZlIGF0IHRoZSBzb2x1dGlvbjoKCiQkCiAgXG1hdGhiYntFfSh4X3QpID0gXGRlbHRhIHQKJCQ=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGltZSBTZXJpZXMgRXhlcmNpc2VzIgphdXRob3I6ICJTdGV2ZW4gTW9lbiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBmaWxlIHdpbGwgY29udGFpbiBleGVyY2lzZXMgd2hpY2ggd2Ugd2lsbCB1c2UgaW4gY2xhc3MuCgojIyBFeGVyY2lzZSAxOiBGaW5kaW5nIHRoZSBFeHBlY3RlZCBWYWx1ZSBvZiBhIFJhbmRvbSBXYWxrIHdpdGggRHJpZnQKCkNvbXB1dGUgdGhlIGV4cGVjdGF0aW9uIG9mIGEgcmFuZG9tIHdhbGsgd2l0aCBkcmlmdCBtb2RlbCBnaXZlbiBiZWxvdzoKCiQkCiAgXGJlZ2lue2FsaWduZWR9CiAgeF90ID0gXGRlbHRhIHQgKyBcc3VtX3tqPTF9XnQgd19qLAogIHQgPSAxLDIsLi4uLgogIFxlbmR7YWxpZ25lZH0KJCQKCndoZXJlICR3X3QkIGlzIGEgd2hpdGUgbm9pc2Ugc2VyaWVzIGRlZmluZWQgYnk6CgokJAogIFxiZWdpbnthbGlnbmVkfQogIHdfdCBcc2ltIFx0ZXh0e3dufSgwLCBcc2lnbWFfbV4yKQogIFxlbmR7YWxpZ25lZH0KJCQKCiMjIEV4ZXJjaXNlIDEgU29sdXRpb246IEZpbmRpbmcgdGhlIEV4cGVjdGVkIFZhbHVlIG9mIGEgUmFuZG9tIFdhbGsgd2l0aCBEcmlmdAoKV2UgYmVnaW4gYnkgdGFraW5nIHRoZSBleHBlY3RhdGlvbiBvZiBib3RoIHNpZGVzIG9mIHRoZSBlcXVhdGlvbiBiZWxvdwoKJCQKICBcYmVnaW57YWxpZ25lZH0KICBcbWF0aGJie0V9KHhfdCkgPSBcbWF0aGJie0V9XGxlZnQoXGRlbHRhIHQgKyBcc3VtX3tqPTF9XnQgd19qXHJpZ2h0KQogIFxlbmR7YWxpZ25lZH0KJCQKCkFuIGltcG9ydGFudCBwcm9wZXJ0eSBvZiBleHBlY3RlZCB2YWx1ZXMgaXMgdGhhdCBpdCBpcyBhIGxpbmVhciBvcGVyYXRvciwgd2hpY2ggaXMgdG8gc2F5IHRoYXQgdGhlIGZvbGxvd2luZyBpcyBpbiB0cnVlIGluIGdlbmVyYWwgd2hlcmUgJGEkIGFuZCAkYiQgYXJlIHJlYWwtdmFsdWVkIGNvbnN0YW50cyBhbmQgJFhfdCQgYW5kICRZX3QkIGFyZSByYW5kb20gdmFyaWFibGVzIHdpdGggZmluaXRlIGV4cGVjdGVkIHZhbHVlcywgc3VwcG9ydCBvdmVyIHRoZSBlbnRpcmUgcmVhbCBsaW5lLCBhbmQgaW5kZXhlZCBieSB0aW1lOgoKJCQKXG1hdGhiYntFfShhWF90ICsgYllfdCApID0gYVxtYXRoYmJ7RX0oWF90ICkgKyBiXG1hdGhiYntFfShZX3QgKQokJAoKQmVsb3cgaXMgYSBicmllZiBwcm9vZiB3b3JraW5nIGRpcmVjdGx5IGZyb20gdGhlIGRlZmluaXRpb24gb2YgYW4gZXhwZWN0YXRpb246CgokJApcbWF0aGJie0V9KGFYX3QgICsgYllfdCApID0gXGludF97LVxpbmZ0eX1ee1xpbmZ0eX0gKGFYX3QgICsgYllfdCkgZHQKJCQKJCQKPSBhXGludF97LVxpbmZ0eX1ee1xpbmZ0eX0gKFhfdCkgZHQgICsgYlxpbnRfey1caW5mdHl9XntcaW5mdHl9IChZX3QpIGR0CiQkCiQkCj0gXG1hdGhiYntFfShYX3QgKSArIGJcbWF0aGJie0V9KFlfdCApCiQkCgpXaGljaCBjb21wbGV0ZXMgdGhlIHByb29mLgoKVGh1cywgYXBwbHlpbmcgdGhlIHByb3BlcnR5IHByb3ZlZCBhYm92ZSwgd2UgY2FuIHNheSB0aGUgZm9sbG93aW5nOgoKJCQKICBcbWF0aGJie0V9KHhfdCkgPSBcbWF0aGJie0V9XGxlZnQoXGRlbHRhIHQgKyBcc3VtX3tqPTF9XnQgd19qXHJpZ2h0KSA9IFxtYXRoYmJ7RX0oXGRlbHRhIHQpICsgXG1hdGhiYntFfSBcbGVmdChcc3VtX3tqPTF9XnQgd19qXHJpZ2h0KQokJAoKTm90aW5nIHRoYXQgaW4gdGhlIHJhbmRvbSB3YWxrIG1vZGVsLCBib3RoICRcZGVsdGEkIGFuZCAkdCQgYXJlIHJlYWwgdmFsdWVkIGNvbnN0YW50cywgd2Uga25vdyAkIFxtYXRoYmJ7RX0oXGRlbHRhIHQpJC4gQWxzbywgdXNpbmcgdGhlIGxpbmVhciBvcGVyYXRvciBwcm9wZXJ0eSB1c2VkIGFib3ZlLCB3ZSBjYW4gYnJlYWsgYXBhcnQgdGhlIHN1bSBvZiB0aGUgbm9pc2UgdGVybXMgYXMgZm9sbG93czoKCiQkClxtYXRoYmJ7RX0gXGxlZnQoXHN1bV97aj0xfV50IHdfalxyaWdodCkgPSBcbWF0aGJie0V9KHdfMSkgKyBcbWF0aGJie0V9KHdfMikgKyAuLi4gKyBcbWF0aGJie0V9KHdfdCkKJCQKCk5vdGUgdGhhdCBpbiBvdXIgZm9ybXVsYXRpb24gb2Ygd2hpdGUgbm9pc2UsIHdlIHNhaWQgdGhhdCAkd190IFxzaW0gXHRleHR7d259KDAsIFxzaWdtYV9tXjIpJCwgdGh1cywgdGhlIGV4cGVjdGVkIHZhbHVlIG9mICR3X3QkIGlzIDAuIAoKU3ludGhlc2l6aW5nIGFsbCBvZiB0aGUgYWJvdmUgZmFjdHMsIHdlIGFycml2ZSBhdCB0aGUgc29sdXRpb246CgokJAogIFxtYXRoYmJ7RX0oeF90KSA9IFxkZWx0YSB0CiQkCgoKIyMgRXhlcmNpc2UgMjogRmluZGluZyB0aGUgQXV0b2NvdmFyaWFuY2Ugb2YgYSBSYW5kb20gV2FsayB3aXRoIERyaWZ0CgpDb21wdXRlIHRoZSBleHBlY3RhdGlvbiBvZiBhIHJhbmRvbSB3YWxrIHdpdGggZHJpZnQgbW9kZWwgZ2l2ZW4gYmVsb3c6CgokJAogIFxiZWdpbnthbGlnbmVkfQogIHhfdCA9IFxkZWx0YSB0ICsgXHN1bV97aj0xfV50IHdfaiwKICB0ID0gMSwyLC4uLi4KICBcZW5ke2FsaWduZWR9CiQkCgoKd2hlcmUgJHdfdCQgaXMgYSB3aGl0ZSBub2lzZSBzZXJpZXMgZGVmaW5lZCBieToKCiQkCiAgXGJlZ2lue2FsaWduZWR9CiAgd190IFxzaW0gXHRleHR7d259KDAsIFxzaWdtYV9tXjIpCiAgXGVuZHthbGlnbmVkfQokJAoKIyMgRXhlcmNpc2UgMiBTb2x1dGlvbjogRmluZGluZyB0aGUgQXV0b2NvdmFyaWFuY2Ugb2YgYSBSYW5kb20gV2FsayB3aXRoIERyaWZ0CgpPYnNlcnZlIHRoYXQgZm9yIGEgcmFuZG9tIHdhbGsgd2l0aCBkcmlmdCAkeF90JCwgd2Uga25vdyB0aGF0IHRoZSBmb2xsb3dpbmcgaXMgdHJ1ZToKCiQkCnhfdCA9IFxzdW1fe2o9MX1edCB3X2ogKyB0IFxkZWx0YQokJAoKVGh1cywgY29tcGFyaW5nIHRoZSBzZXJpZXMgYXQgdHdvIGRpZmZlcmVudCBwb2ludHMgJHMkIGFuZCAkdCQsIHdlIGhhdmU6CgokJApcZ2FtbWFfeChzLHQpID0gY292KHhfcywgeF90KSA9IGNvdihcc3VtX3tqPTF9XnQgd19qICsgdCBcZGVsdGEsIFxzdW1fe2k9MX1ecyB3X2kgKyBzIFxkZWx0YSkKJCQKCldlIGtub3cgdGhhdCBzaW5jZSAkdCBcZGVsdGEkIGFuZCAgJHMgXGRlbHRhJCBhcmUgYm90aCBjb25zdGFudHMsIHRoZSBhYm92ZSBpcyBlcXVpdmFsZW50IHRvOgoKJCQKPSBjb3YoXHN1bV97aj0xfV50IHdfaiwgXHN1bV97aT0xfV5zIHdfaSkKJCQKCk5vdGUgdGhhdCBmb3IgJGkgXG5lIGokLCB3ZSBrbm93IHRoYXQgdGhlIGRlZmluaXRpb24gb2Ygd2hpdGUgbm9pc2UgdGVsbHMgdXMgdGhhdCAkY292KHdfaSwgd19qKSA9IDAkLiBUaHVzLCBpdCBmb2xsb3dzIHRoYXQgdGhlIGFib3ZlIGV4cHJlc3Npb24gaXMgZXF1YWwgdG86CgokJAo9IGNvdihcc3VtX3tqPTF9XnQgd19qLCBcc3VtX3tpPTF9XnMgd19pKSA9IFxtaW4ocyx0KSBcc2lnbWFfd14yCiQkCgojIyBFeGVyY2lzZXMgMyBhbmQgNDogSXMgYSByYW5kb20gd2FsayB3aXRoIGRyaWZ0IHdlYWtseSBzdGF0aW9uYXJ5CgpBcmUgdGhlIGZvbGxvd2luZyB0aW1lIHNlcmllcyB3ZWFrbHkgc3RhdGlvbmFyeT8KCjEuICR4X3QgPSBcZGVsdGEgdCArIFxzdW1fe2o9MX1edCB3X2osIHQgPSAxLDIsLi4uLiQKMi4gJHZfdCA9ICBcdGZyYWN7MX17M30gKHdfe3QtMX0gKyB3X3QgKyB3X3t0KzF9KSQKCndoZXJlICR3X3QkIGlzIGEgd2hpdGUgbm9pc2Ugc2VyaWVzIGRlZmluZWQgYnk6CgokJAogIFxiZWdpbnthbGlnbmVkfQogIHdfdCBcc2ltIFx0ZXh0e3dufSgwLCBcc2lnbWFfbV4yKQogIFxlbmR7YWxpZ25lZH0KJCQKCiMjIEV4ZXJjaXNlIDMgU29sdXRpb24KCldlIGZvdW5kIGVhcmxpZXIgdGhhdCB0aGUgZXhwZWN0ZWQgdmFsdWUgb2YgYSByYW5kb20gd2FsayB3aXRoIGRyaWZ0IHdhcyBnaXZlbiBieSB0aGUgZm9sbG93aW5nOgoKJCQKXG1hdGhiYntFfSh4X3QpID0gXGRlbHRhIHQKJCQKCkFsc28sIHRoZSBhdXRvY292YXJpYW5jZSBpcyBnaXZlbiBieToKCiQkClxnYW1tYV94KHMsdCkgPSBcbWluKHMsdCkgXHNpZ21hX3deMgokJAoKRm9yIGEgc2VyaWVzIHRvIGJlIHdlYWtseSBzdGF0aW9uYXJ5LCB0aGUgbWVhbiBmdW5jdGlvbiBtdXN0IGJlIGNvbnN0YW50LiBXZSBjYW4gc2VlIGZyb20gdGhlIGFib3ZlIG1lYW4gZnVuY3Rpb24gdGhhdCB0aGUgbWVhbiBmdW5jdGlvbiBpcyBub24tY29uc3RhbnQgdW5sZXNzICRcZGVsdGEgPSAwJC4gRnVydGhlcm1vcmUsIHRoZSBhdXRvY292YXJpYW5jZSBmdW5jdGlvbiBkb2VzIG5vdCBkZXBlbmQgb24gJHMkIGFuZCAkdCQgb25seSB0aHJvdWdoIHRoZWlyIGRpZmZlcmVuY2VzLiBFaXRoZXIgb2YgdGhlc2UgaXMgc3VmZmljaWVudCB0byBzaG93IHRoYXQgYSByYW5kb20gd2FsayB3aXRoIGEgZHJpZnQgaXMgbm90IHN0YXRpb25hcnkuCgojIyBFeGVyY2lzZSA0IFNvbHV0aW9uCgpMZXQncyBzdGFydCBieSBmaW5kaW5nIHRoZSBleHBlY3RlZCB2YWx1ZSBvZiB0aGUgc2VyaWVzOgoKJCQKXG1hdGhiYntFfSh2X3QpID0gXG1hdGhiYntFfSAoXHRmcmFjezF9ezN9ICh3X3t0LTF9ICsgd190ICsgd197dCsxfSkpCiQkCiQkCj0gXHRmcmFjezF9ezN9XG1hdGhiYntFfSAod197dC0xfSArIHdfdCArIHdfe3QrMX0pID0gXHRmcmFjezF9ezN9KFxtYXRoYmJ7RX0gKHdfe3QtMX0pICsgXG1hdGhiYntFfSAod197dH0pICsgXG1hdGhiYntFfSAod197dCsxfSkpID0gMAokJAoKVGhlIG1lYW4gZnVuY3Rpb24gaXMgY29uc3RhbnQgYXQgMC4gTmV4dCwgbGV0J3MgZmluZCB0aGUgYXV0b2NvdmFyaWFuY2UgZnVuY3Rpb246CgokJApcZ2FtbWFfdih0LHQpID0gXHRmcmFjezF9ezl9IGNvdigod197dC0xfSArIHdfdCArIHdfe3QrMX0pLCAod197dC0xfSArIHdfdCArIHdfe3QrMX0pKQokJAoKUmVjYWxsIHRoYXQgZm9yICRzIFxuZXEgdCQsICRjb3Yod19zLCB3X3QpID0gMCQuIFRodXMsIHRoZSBhYm92ZSBzaW1wbGlmaWVzIHRvOgoKJCQKXGdhbW1hX3YodCx0KSA9IFx0ZnJhY3sxfXs5fSAoY292KHdfe3QtMX0sIHdfe3QtMX0pICsgY292KHdfe3R9LCB3X3t0fSkgKyBjb3Yod197dCsxfSwgd197dCsxfSkpID0gXHRmcmFjezN9ezl9XHNpZ21hX3deMgokJAoKRm9sbG93aW5nIHNpbWlsYXIgbG9naWMsIHdlIGtub3c6CgokJApcZ2FtbWFfdih0KzEsdCkgPSBcdGZyYWN7MX17OX0gY292KCh3X3t0fSArIHdfe3QrMX0gKyB3X3t0KzJ9KSwgKHdfe3QtMX0gKyB3X3QgKyB3X3t0KzF9KSkKJCQKJCQKPSBcdGZyYWN7MX17OX0oY292KHdfe3R9LCB3X3t0fSkgKyBjb3Yod197dCsxfSwgd197dCsxfSkpID0gXHRmcmFjezJ9ezl9XHNpZ21hX3deMgokJAoKVGhpcyBsb2dpYyBjYW4gYmUgcmVwZWF0ZWQgdG8gc2hvdyB0aGUgZm9sbG93aW5nIHNvbHV0aW9uOgoKJCQKXGdhbW1hX3Yocyx0KSA9IFx0ZnJhY3szfXs5fSBcc2lnbWFfd14yIFx0ZXh0eyBpZiB9IHMgPSB0CiQkCiQkCj0gXHRmcmFjezJ9ezl9IFxzaWdtYV93XjIgXHRleHR7IGlmIH0gfHMtdHwgPSAxCiQkCiQkCj0gXHRmcmFjezF9ezl9IFxzaWdtYV93XjIgXHRleHR7IGlmIH0gfHMtdHwgPSAyCiQkCiQkCj0gMCBcdGV4dHsgaWYgfSB8cy10fCA+IDIKJCQKClRoZSBhYm92ZSBhdXRvY292YXJpYW5jZSBhbmFseXNpcyBzaG93cyB0aGF0IHRoZSBzZWNvbmQgY29uZGl0aW9uIGZvciBhIHdlYWtseSBzdGF0aW9uYXJ5IHRpbWUgc2VyaWVzIGlzIG1ldC4gVGh1cywgdGhpcyBtb3ZpbmcgYXZlcmFnZSBpcyB3ZWFrbHkgc3RhdGlvbmFyeS4=</div>
 
 
 

@@ -6,8 +6,6 @@ output: html_notebook
 
 This file will contain exercises which we will use in class.
 
-# Exercises
-
 ## Exercise 1: Finding the Expected Value of a Random Walk with Drift
 
 Compute the expectation of a random walk with drift model given below:
@@ -19,7 +17,13 @@ $$
   \end{aligned}
 $$
 
-# Solutions
+where $w_t$ is a white noise series defined by:
+
+$$
+  \begin{aligned}
+  w_t \sim \text{wn}(0, \sigma_m^2)
+  \end{aligned}
+$$
 
 ## Exercise 1 Solution: Finding the Expected Value of a Random Walk with Drift
 
@@ -70,3 +74,130 @@ Synthesizing all of the above facts, we arrive at the solution:
 $$
   \mathbb{E}(x_t) = \delta t
 $$
+
+
+## Exercise 2: Finding the Autocovariance of a Random Walk with Drift
+
+Compute the expectation of a random walk with drift model given below:
+
+$$
+  \begin{aligned}
+  x_t = \delta t + \sum_{j=1}^t w_j,
+  t = 1,2,....
+  \end{aligned}
+$$
+
+
+where $w_t$ is a white noise series defined by:
+
+$$
+  \begin{aligned}
+  w_t \sim \text{wn}(0, \sigma_m^2)
+  \end{aligned}
+$$
+
+## Exercise 2 Solution: Finding the Autocovariance of a Random Walk with Drift
+
+Observe that for a random walk with drift $x_t$, we know that the following is true:
+
+$$
+x_t = \sum_{j=1}^t w_j + t \delta
+$$
+
+Thus, comparing the series at two different points $s$ and $t$, we have:
+
+$$
+\gamma_x(s,t) = cov(x_s, x_t) = cov(\sum_{j=1}^t w_j + t \delta, \sum_{i=1}^s w_i + s \delta)
+$$
+
+We know that since $t \delta$ and  $s \delta$ are both constants, the above is equivalent to:
+
+$$
+= cov(\sum_{j=1}^t w_j, \sum_{i=1}^s w_i)
+$$
+
+Note that for $i \ne j$, we know that the definition of white noise tells us that $cov(w_i, w_j) = 0$. Thus, it follows that the above expression is equal to:
+
+$$
+= cov(\sum_{j=1}^t w_j, \sum_{i=1}^s w_i) = \min(s,t) \sigma_w^2
+$$
+
+## Exercises 3 and 4: Is a random walk with drift weakly stationary
+
+Are the following time series weakly stationary?
+
+1. $x_t = \delta t + \sum_{j=1}^t w_j, t = 1,2,....$
+2. $v_t =  \tfrac{1}{3} (w_{t-1} + w_t + w_{t+1})$
+
+where $w_t$ is a white noise series defined by:
+
+$$
+  \begin{aligned}
+  w_t \sim \text{wn}(0, \sigma_m^2)
+  \end{aligned}
+$$
+
+## Exercise 3 Solution
+
+We found earlier that the expected value of a random walk with drift was given by the following:
+
+$$
+\mathbb{E}(x_t) = \delta t
+$$
+
+Also, the autocovariance is given by:
+
+$$
+\gamma_x(s,t) = \min(s,t) \sigma_w^2
+$$
+
+For a series to be weakly stationary, the mean function must be constant. We can see from the above mean function that the mean function is non-constant unless $\delta = 0$. Furthermore, the autocovariance function does not depend on $s$ and $t$ only through their differences. Either of these is sufficient to show that a random walk with a drift is not stationary.
+
+## Exercise 4 Solution
+
+Let's start by finding the expected value of the series:
+
+$$
+\mathbb{E}(v_t) = \mathbb{E} (\tfrac{1}{3} (w_{t-1} + w_t + w_{t+1}))
+$$
+$$
+= \tfrac{1}{3}\mathbb{E} (w_{t-1} + w_t + w_{t+1}) = \tfrac{1}{3}(\mathbb{E} (w_{t-1}) + \mathbb{E} (w_{t}) + \mathbb{E} (w_{t+1})) = 0
+$$
+
+The mean function is constant at 0. Next, let's find the autocovariance function:
+
+$$
+\gamma_v(t,t) = \tfrac{1}{9} cov((w_{t-1} + w_t + w_{t+1}), (w_{t-1} + w_t + w_{t+1}))
+$$
+
+Recall that for $s \neq t$, $cov(w_s, w_t) = 0$. Thus, the above simplifies to:
+
+$$
+\gamma_v(t,t) = \tfrac{1}{9} (cov(w_{t-1}, w_{t-1}) + cov(w_{t}, w_{t}) + cov(w_{t+1}, w_{t+1})) = \tfrac{3}{9}\sigma_w^2
+$$
+
+Following similar logic, we know:
+
+$$
+\gamma_v(t+1,t) = \tfrac{1}{9} cov((w_{t} + w_{t+1} + w_{t+2}), (w_{t-1} + w_t + w_{t+1}))
+$$
+$$
+= \tfrac{1}{9}(cov(w_{t}, w_{t}) + cov(w_{t+1}, w_{t+1})) = \tfrac{2}{9}\sigma_w^2
+$$
+
+This logic can be repeated to show the following solution:
+
+$$
+\gamma_v(s,t) = \tfrac{3}{9} \sigma_w^2 \text{ if } s = t
+$$
+$$
+= \tfrac{2}{9} \sigma_w^2 \text{ if } |s-t| = 1
+$$
+$$
+= \tfrac{1}{9} \sigma_w^2 \text{ if } |s-t| = 2
+$$
+$$
+= 0 \text{ if } |s-t| > 2
+$$
+
+The above autocovariance analysis shows that the second condition for a weakly stationary time series is met. Thus, this moving average is weakly stationary.
