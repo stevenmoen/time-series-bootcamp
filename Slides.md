@@ -25,35 +25,37 @@ Day 2 Agenda
 Special Thanks
 ========================================================
 
-Many of the examples used in this presentation can be found in Time Series Analysis and Its Applications by Robert H. Shumway and David S. Stoffer.
+Many of the examples and theory used in this presentation can be found in Time Series Analysis and Its Applications by Robert H. Shumway and David S. Stoffer. 
+
+Thanks to Jess and Rick with all their help putting this together.
 
 
+My Background
+========================================================
+
+- Rice University '14
+- 4 years of work experience at Capital One
+- M.S. in Statistics, UChicago
+- Currently working with Dr. Wei Biao Wu
 
 Examples of Time Series Data 
 ========================================================
 
-This example is from Shumway and Stoffer.
+A plot of quarterly earnings per share from Johnson and Johnson, from Shumway and Stoffer.
 
 ![plot of chunk unnamed-chunk-1](Slides-figure/unnamed-chunk-1-1.png)
 
 Examples of Time Series Data
 ========================================================
 
-Also from Shumway and Stoffer.
+A plot of global temperature deviations, also from Shumway and Stoffer.
 
 ![plot of chunk unnamed-chunk-2](Slides-figure/unnamed-chunk-2-1.png)
-
-Examples of Time Series Data
-========================================================
-
-Also from Shumway and Stoffer.
-
-![plot of chunk unnamed-chunk-3](Slides-figure/unnamed-chunk-3-1.png)
 
 Key Tools
 ========================================================
 
-A common assumption in statistical modeling is independent and identically distributed noise, often abbreviated (i.i.d.).
+A common assumption in statistical modeling is independent and identically distributed noise, often abbreviated as i.i.d.
 
 Two random variables $A$ and $B$ are independent if and only if the following is true:
 
@@ -68,7 +70,8 @@ Why would this pose a problem when modeling time series?
 Key Tools
 ========================================================
 
-Intuitively, someone who studies time series often cares about intertemporal dependencies. Time series analysis uses several tools that are commonly used to analyze the intertemporal relationships within a time series and the relationships between time series.
+- Intuitively, someone who studies time series often cares about intertemporal dependencies. 
+- Time series analysis incorporates several tools designed used to analyze the intertemporal relationships within a time series and the relationships between time series.
 
 Key Tools
 ========================================================
@@ -88,7 +91,7 @@ The mean function of a time series is defined as follows:
 
 $$
   \begin{aligned}
-  \mu_{xt} = \mathbb{E}(x_t) = \int_{-inf}^{inf} x f_t(x)dx
+  \mu_{xt} = \mathbb{E}(x_t) = \int_{-\infty}^{\infty} x f_t(x)dx
   \end{aligned}
 $$
 
@@ -128,15 +131,11 @@ Aside: White noise
 
 According to Shumway and Stoffer, the designation "white" refers to the "analyogy with white light and indicates all possible periodic ocillations are present with equal strength".
 
-[ADD PLOTS]
-
 
 Aside: Random Walk with Drift Model
 ========================================================
 
 This model is very useful in applications such as financial economics, since a random walk often accurately captures the seemingly "random" developments of market participants quickly incorporating relevant information into an asset's price. See "A Random Walk Down Wall Street".
-
-[INSERT QUOTE]
 
 
 Key Tools: Autocovariance
@@ -265,8 +264,11 @@ Important Assumptions: Verification (Exercise)
 Please refer to the .Rmd file for a more in-depth solution.
 
 
+
 Autoregressive Models
 ========================================================
+
+We will get to real data analysis soon, but we need to define a few key models which we will use soon.
 
 An autoregressive model of order p is defined as follows:
 
@@ -389,3 +391,68 @@ $$
 Autoregressive Moving Average Models
 ========================================================
 
+An ARMA(p,q) time series is described below
+
+$$
+x_t = \phi_1 x_{t-1} + ... + \phi_p x_{t-p} + w_t + \theta_1 w_{t-1} + ... + \theta_q w_{t-q}
+$$
+
+where:
+
+- $\phi_p \ne 0$
+- $\phi_q \ne 0$
+- $\sigma_w^2 > 0$
+- The series is mean 0
+- The series is stationary
+
+Diagnostics
+========================================================
+
+We've defined some useful models, but how do we work with them? We need tools to balance out the bias-variance tradeoff.
+
+- Let's look at the plot from The Elements of Statistical Learning on Page 37
+
+Diagnostics
+========================================================
+
+There are three tools commonly used to measure the bias-variance tradeoff in time series
+
+- AIC
+- AICc
+- BIC
+
+Diagnostics - AIC
+========================================================
+
+The AIC is defined as follows:
+
+$$
+AIC = \log \hat{\sigma_k}^2 + \frac{n+2k}{n}
+$$
+
+- The AIC is biased, but people use it still because "there is no true model" in applications
+
+Diagnostics - AIC
+========================================================
+
+The AICc is defined as follows:
+
+$$
+AICc = \log \hat{\sigma_k}^2 + \frac{n+k}{n-k-2}
+$$
+
+Diagnostics - BIC
+========================================================
+
+The BIC is defined as follows:
+
+$$
+BIC = \log \hat{\sigma_k}^2 + \frac{k \log n}{n}
+$$
+
+- The BIC tends to choose smaller models
+
+Thanks!
+========================================================
+
+More to come tomorrow!
