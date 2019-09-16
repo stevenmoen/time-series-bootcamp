@@ -627,3 +627,98 @@ lines(lowess(globtemp), lty=2, lwd=2, col=2) # trend (with default span)
 
 The lowess smoother definitely looks smoother, but misses some of the features of the data that the moving average filter captures. I think that the lowess smoother is a better choice to illustrate an overall trend to an audience because the eye can follow the trend more easily than with the MA filter.
 Having said that, an analysis digging into the more in-depth movements may appreciate the MA filter.
+
+# Question 3.33
+
+```{r}
+# Plot the data
+plot(globtemp)
+```
+
+```{r}
+# Check ADF test for non-stationarity
+adf.test(globtemp)
+```
+
+Data looks non-stationary. Let's convert to an approximate percentage change.
+
+```{r}
+gt_diff = diff(globtemp)
+```
+
+
+```{r}
+plot(gt_diff)
+```
+
+Looks better
+
+```{r}
+adf.test(gt_diff)
+```
+
+Looks good, let's move forward.
+
+```{r}
+# acf(globtemp)
+acf(gt_diff)
+```
+
+MA lags could be 1, 2, 4.
+
+```{r}
+pacf(gt_diff)
+```
+
+AR lags could be 1,2,3. Let's test all of these.
+
+```{r}
+# MA = 1
+# arima(globtemp, order = c(1,1,1))
+m11 = arima(gt_diff, order = c(1,0,1))
+m21 = arima(gt_diff, order = c(2,0,1))
+m31 = arima(gt_diff, order = c(3,0,1))
+
+# MA = 2
+m12 = arima(gt_diff, order = c(1,0,2))
+m22 = arima(gt_diff, order = c(2,0,2))
+m32 = arima(gt_diff, order = c(3,0,2))
+
+# MA = 4
+m14 = arima(gt_diff, order = c(1,0,4))
+m24 = arima(gt_diff, order = c(2,0,4))
+m34 = arima(gt_diff, order = c(3,0,4))
+
+```
+
+```{r}
+AIC(m11)
+AIC(m21)
+AIC(m31)
+AIC(m12)
+AIC(m22)
+AIC(m32)
+AIC(m14)
+AIC(m24)
+AIC(m34)
+```
+
+```{r}
+BIC(m11)
+BIC(m21)
+BIC(m31)
+BIC(m12)
+BIC(m22)
+BIC(m32)
+BIC(m14)
+BIC(m24)
+BIC(m34)
+```
+
+Need to compare an ARMA(1,1) with an ARMA(1,4)
+
+```{r}
+tsdiag(m11)
+tsdiag(m14)
+```
+

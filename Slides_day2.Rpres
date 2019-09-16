@@ -516,11 +516,11 @@ ns_vec = rep(0,100)
 s_vec = rep(0,100)
 
 for (i in 2:100){
-  ns_vec[i] = ns_vec[i-1] + rnorm(1,0,0.02)
+  ns_vec[i] = ns_vec[i-1] + rnorm(1,0,1)
   s_vec[i] = 0.9*s_vec[i-1] + rnorm(1,0,1)
 }
 
-plot(s_vec, type = "l", xlab = "Time", ylab = "Value", main = "Comparison of Two AR Models")
+plot(s_vec, type = "l", xlab = "Time", ylab = "Value", main = "Comparison of Two AR Models", ylim = c(-20,20))
 lines(ns_vec, col = "red")
 ```
 
@@ -590,6 +590,7 @@ Examining the ACF and PACF
 ========================================================
 
 ```{r}
+acf2(pc_oil)
 acf(pc_oil, 24)
 ```
 
@@ -608,19 +609,69 @@ Fitting Several Models
 ========================================================
 
 ```{r}
-# AR Models
+# q = 1
 m11=arima(pc_oil,order=c(1,0,1))
 m21=arima(pc_oil,order=c(2,0,1))
 m31=arima(pc_oil,order=c(3,0,1))
 m71=arima(pc_oil,order=c(7,0,1))
+# q = 3
+m13=arima(pc_oil,order=c(1,0,3))
+m23=arima(pc_oil,order=c(2,0,3))
+m33=arima(pc_oil,order=c(3,0,3))
+m73=arima(pc_oil,order=c(7,0,3))
+# q = 8
+m18=arima(pc_oil,order=c(1,0,8))
+m28=arima(pc_oil,order=c(2,0,8))
+m38=arima(pc_oil,order=c(3,0,8))
+m78=arima(pc_oil,order=c(7,0,8))
 
-# m11
-# m21
-# m31
-# m71
+m2020=arima(pc_oil,order=c(20,0,20))
+
 ```
 
-It looks like the last model is the best per the AIC.
+```{r}
+# ?AIC
+AIC(m11)
+AIC(m21)
+AIC(m31)
+AIC(m71)
+AIC(m13)
+AIC(m23)
+AIC(m33)
+AIC(m73)
+AIC(m18)
+AIC(m28)
+AIC(m38)
+AIC(m78)
+```
+
+ARMA(1,8)
+
+```{r}
+BIC(m11)
+BIC(m21)
+BIC(m31)
+BIC(m71)
+BIC(m13)
+BIC(m23)
+BIC(m33)
+BIC(m73)
+BIC(m18)
+BIC(m28)
+BIC(m38)
+BIC(m78)
+```
+
+ARMA(1,1)
+
+```{r}
+tsdiag(m18)
+tsdiag(m11)
+```
+
+```{r}
+m18
+```
 
 
 Fitting Several Models
@@ -656,3 +707,4 @@ All in Shumway and Stoffer.
 - Question 2.10
 - Question 3.33 (All But Forecast)
 - Question 3.34 (All But Prediction Intervals)
+
